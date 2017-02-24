@@ -30,17 +30,23 @@ class LinkData {
         NODE* headNodePtr;
         NODE* tailNodePtr;
         unsigned int nodeCount;        
+        unsigned int nodeSortingPos;
 
         void deleteNode(NODE* nodePtr);
         NODE* allocateNode(void);
 
         void insertFirstItem(int item);
-        void deleteNodePtr(NODE* tempItr);
+        void deleteNodePtr(NODE* tempItr);        
+        void insertAftBinaryAscSort(int item);
+        void insertAftRecursiveSort(int item);
+        void insertBeforeNodePtr(int item, NODE* nodePtrRef, unsigned int pos);
 
     public:
         LinkData();
         void insertAtFront(int item);
         void insertAtBack(int item);
+
+        void insertAfterAscendingSort(int item);
 
         RETURN_STATUS insertAtPos(int item, int pos);
 

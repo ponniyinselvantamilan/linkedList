@@ -179,6 +179,96 @@ void LinkData::deleteNodePtr(NODE* tempItr) {
 }
 
 
+void LinkData::insertBeforeNodePtr(int item, NODE* nodePtrRef, unsigned int pos) {
+
+    NODE* addNode = allocateNode();
+
+    curNodePtr = nodePtrRef;
+
+    addNode->data = item;
+    addNode->prev = curNodePtr->prev;
+    addNode->next = curNodePtr;
+    curNodePtr->prev->next = addNode;
+    curNodePtr->prev = addNode;
+}
+
+
+void LinkData::insertAftBinaryAscSort(int item) {
+
+    NODE* tempNodePtr = NULL;
+    unsigned int tempPos = 1;
+
+    tempNodePtr = headNodePtr;
+
+    while(tempNodePtr != NULL) {
+
+        if( (item > tempNodePtr->data) && (item < tempNodePtr->next->data) ) {
+
+            insertBeforeNodePtr(item, tempNodePtr->next, tempPos);
+            break;
+        }
+        tempNodePtr = tempNodePtr->next;
+
+        tempPos++;
+    }
+}
+
+
+void LinkData::insertAftRecursiveSort(int item) {
+
+    NODE* tempNodePtr = NULL;
+
+    unsigned int tempPos = nodeCount / 2;
+
+    tempNodePtr = headNodePtr;
+
+    while(tempNodePtr != NULL) {
+
+        if( (item > tempNodePtr->data) && (item < tempNodePtr->next->data) ) {
+
+            insertBeforeNodePtr(item, tempNodePtr->next, tempPos);
+            break;
+        }
+        else {
+
+            for(unsigned int loop = 1; loop <= tempPos; loop++) {
+                tempNodePtr = tempNodePtr->next;
+            }
+            if()
+
+        }
+
+
+        tempPos++;
+    }
+}
+
+
+
+void LinkData::insertAfterAscendingSort(int item) {
+
+    if(headNodePtr == NULL) {
+
+        insertFirstItem(item);
+    }
+    else if(headNodePtr->data >= item) {
+        insertAtFront(item);
+    }
+    else if(tailNodePtr->data <= item) {
+        insertAtBack(item);
+    }
+    else {
+        if(nodeCount <= 10) {
+            insertAftBinaryAscSort(item);
+        }
+        else {
+            insertAftRecursiveSort(item);
+        }
+
+    }
+}
+
+
 
 void LinkData::deleteItem(int item) {
 
@@ -188,25 +278,7 @@ void LinkData::deleteItem(int item) {
 
         if(tempItr->data == item) {
 
-            deleteNodePtr(tempItr);
-
-            /*curNodePtr = tempItr->prev;
-
-            if(tempItr == headNodePtr) {
-                headNodePtr = tempItr->next;
-            }
-            else {
-                curNodePtr->next = tempItr->next;
-            }
-
-            if(tempItr == tailNodePtr) {
-                tailNodePtr = tempItr->prev;
-            }
-            else {
-                tempItr->next->prev = curNodePtr;
-            }
-
-            deleteNode(tempItr);*/
+            deleteNodePtr(tempItr);            
 
             break;
         }

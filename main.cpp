@@ -4,9 +4,7 @@
 using namespace std;
 
 
-int main()
-{
-    cout << "Hello World!" << endl;
+void testFunc1(void) {
 
     RETURN_STATUS retCode = ERROR;
     LinkData linkData;
@@ -66,6 +64,41 @@ int main()
     linkData.displayForward();
 
     linkData.deleteLinkData();
+
+}
+
+
+void testFunc2(void) {
+
+    cout << "testFunc2..." << endl;
+
+    LinkData linkData;
+
+    unsigned int numberCount = 0;
+    unsigned int inputNumber = 0;
+
+    cin >> numberCount;
+
+    for(unsigned int loop = 0; loop < numberCount; loop++) {
+
+        cin >> inputNumber;
+        linkData.insertAfterAscendingSort(inputNumber);
+
+        linkData.displayForward();
+    }
+    linkData.deleteLinkData();
+}
+
+
+
+int main()
+{
+    cout << "Hello World!" << endl;
+
+    //testFunc1();
+
+    testFunc2();
+
     return 0;
 }
 
